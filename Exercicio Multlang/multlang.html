@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            border: 0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'Mont';
+            src: url(fonts/Montserrat-VariableFont_wght.ttf);
+        }
+
+        button {
+            background: transparent;
+            border: 0;
+            margin: 0 7px;
+        }
+
+        .container {
+            margin: 50px 18vw 100px 18vw;
+        }
+
+        h1 {
+            font: 700 30px 'Mont', sans-serif;
+            text-align: center;
+        }
+
+        h2 {
+            font: 600 26px 'Mont', sans-serif;
+            margin-top: 50px;
+        }
+
+        .lado-a-lado div {
+            font: 500 17px 'Mont', sans-serif;
+            text-align: justify;
+            margin: 0 50px;
+        }
+
+
+        header {
+            padding: 10px 10vw;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 5px solid #FFD233;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .lado-a-lado {
+            display: flex;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .lado-a-lado {
+                flex-direction: column;
+            }
+
+            .lado-a-lado div {
+                margin: 50px 0 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="img/logoPassatempo.png" alt="logo">
+        </div>
+        <div id="idiomas">
+            <button onclick="Escolher('ptbr')"><img src="img/Brasil.png" alt="brasil"></button>
+            <button onclick="Escolher('en')"><img src="img/ingles.png" alt="ingles"></button>
+            <button onclick="Escolher('es')"><img src="img/espanhol.png" alt="espanhol"></button>
+        </div>
+    </header>
+
+
+
+
+    <div class="container">
+
+        <h1 id="paragrafo1"></h1>
+
+        <h2 id="paragrafo2"></h2>
+        <div class="lado-a-lado">
+            <img src="img/ImagemMelhorIdade.png" alt="">
+            <div id="paragrafo3"></div>
+        </div>
+
+
+        <h2 id="paragrafo4"></h2>
+        <div class="lado-a-lado">
+            <img src="img/ImagemMúsicaClássica.png" alt="">
+            <div id="paragrafo5"></div>
+        </div>
+
+        <h2 id="paragrafo6"></h2>
+        <div class="lado-a-lado">
+            <img src="img/ImagemAmigoLeitor.png" alt="">
+            <div id="paragrafo7"></div>
+        </div>
+
+        <h2 id="paragrafo8"></h2>
+        <div class="lado-a-lado">
+            <img src="img/ImagemJogoteca.png" alt="">
+            <div id="paragrafo9"></div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        function Escolher(idioma) {
+
+            fetch(`textos_${idioma}.json`)
+                .then(resposta => resposta.json())
+                .then(texto => {
+                    document.getElementById('paragrafo1').innerHTML = texto.paragrafo1;
+                    document.getElementById('paragrafo2').innerHTML = texto.paragrafo2;
+                    document.getElementById('paragrafo3').innerHTML = texto.paragrafo3;
+                    document.getElementById('paragrafo4').innerHTML = texto.paragrafo4;
+                    document.getElementById('paragrafo5').innerHTML = texto.paragrafo5;
+                    document.getElementById('paragrafo6').innerHTML = texto.paragrafo6;
+                    document.getElementById('paragrafo7').innerHTML = texto.paragrafo7;
+                    document.getElementById('paragrafo8').innerHTML = texto.paragrafo8;
+                    document.getElementById('paragrafo9').innerHTML = texto.paragrafo9;
+                })
+                .catch(error => console.error('Erro buscando textos:', error));
+        }
+        Escolher('ptbr');
+    </script>
+</body>
+
+</html>
